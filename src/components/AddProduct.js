@@ -1,8 +1,7 @@
-// src/components/AddProduct.js
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../components/action';
+
 
 const AddProduct = () => {
   const [name, setName] = useState('');
@@ -12,44 +11,59 @@ const AddProduct = () => {
 
   const handleSubmit = () => {
     const newProduct = { name, quantity, price, dateAdded: new Date() };
-    axios.post('http://localhost:5000/api/inventory/add', newProduct)
-      .then(response => {
-        dispatch(addProduct(response.data));
-        setName('');
-        setQuantity(0);
-        setPrice(0);
-      });
+    dispatch(addProduct(newProduct));
+    setName('');
+    setQuantity(0);
+    setPrice(0);
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">เพิ่มสินค้า</h1>
-      <input
-        type="text"
-        placeholder="ชื่อสินค้า"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="border p-2 mb-2 w-full"
-      />
-      <input
-        type="number"
-        placeholder="จำนวน"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        className="border p-2 mb-2 w-full"
-      />
-      <input
-        type="number"
-        placeholder="ราคา"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        className="border p-2 mb-2 w-full"
-      />
-      <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 mt-2">
-        เพิ่มสินค้า
-      </button>
+    <div className="max-w-3xl mx-auto mt-5 p-6 bg-white rounded-lg shadow-md ">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Add New Product</h1>
+      <div className="space-y-4">
+        <label htmlFor="price" className="block text-sm/6 font-medium text-gray-900">
+            Product Name
+        </label>
+        <input
+          type="text"
+          placeholder="Product Name"
+          name="productName"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <label htmlFor="price" className="block text-sm/6 font-medium text-gray-900">
+            Quantity
+        </label>
+        <input
+          type="number"
+          placeholder="Quantity"
+          name="quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <label htmlFor="price" className="block text-sm/6 font-medium text-gray-900">
+            Price
+        </label>
+        <input
+          type="number"
+          placeholder="Price"
+          name="price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={handleSubmit}
+          className="w-full p-3 bg-gray-900 text-white rounded-lg hover:bg-gray-600 transition-colors"
+        >
+          Add Product
+        </button>
+      </div>
     </div>
   );
 };
 
 export default AddProduct;
+
