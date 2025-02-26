@@ -1,24 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
+import rootReducer from './components/rootReducer';
 
-const initialState = {
-  products: [],
-};
-
-const inventoryReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_PRODUCTS':
-      return { ...state, products: action.payload };
-    case 'ADD_PRODUCT':
-      return { ...state, products: [...state.products, action.payload] };
-    default:
-      return state;
-  }
-};
-
-const store = configureStore({
-  reducer: {
-    inventory: inventoryReducer,
-  },
-});
+const store = createStore(
+  rootReducer, // ใช้ rootReducer ที่รวม reducer ของ products
+  applyMiddleware(thunk) // สำหรับจัดการกับ async actions
+);
 
 export default store;
