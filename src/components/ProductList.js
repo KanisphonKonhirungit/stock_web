@@ -17,20 +17,16 @@ const ProductList = () => {
     const [isConfirmWithdrawOpen, setIsConfirmWithdrawOpen] = useState(false);
     const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
-    const [withdrawQuantity, setWithdrawQuantity] = useState(1); // state สำหรับเก็บจำนวนที่กรอก
+    const [withdrawQuantity, setWithdrawQuantity] = useState(1);
     const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   
     useEffect(() => {
       dispatch(fetchProducts());
     }, [dispatch]);
   
-    useEffect(() => {
-      console.log("Fetched products:", products);
-    }, [products]);
-  
     const handleWithdraw = (productId, name , quantity) => {
       setCurrentProduct({ id: productId, name: name, quantity: quantity });
-      setWithdrawQuantity(1); // รีเซ็ตจำนวนที่กรอกเมื่อเปิด modal
+      setWithdrawQuantity(1);
       setIsConfirmWithdrawOpen(true);
     };
   
@@ -50,13 +46,13 @@ const ProductList = () => {
     const confirmWithdraw = () => {
       dispatch(withdrawProduct(currentProduct.id, withdrawQuantity));
       setIsConfirmWithdrawOpen(false);
-      setIsSuccessModalOpen(true); // เมื่อ Withdraw สำเร็จให้แสดง Success Dialog
+      setIsSuccessModalOpen(true);
     };
   
     const confirmDelete = () => {
       dispatch(deleteProduct(currentProduct.id));
       setIsConfirmDeleteOpen(false);
-      setIsSuccessModalOpen(true); // เมื่อ Delete สำเร็จให้แสดง Success Dialog
+      setIsSuccessModalOpen(true);
     };
   
     const cancelAction = () => {
@@ -65,7 +61,7 @@ const ProductList = () => {
     };
   
     const handleQuantityChange = (event) => {
-      setWithdrawQuantity(event.target.value); // อัพเดตจำนวนที่กรอก
+      setWithdrawQuantity(event.target.value);
     };
   
     if (!Array.isArray(products) || products.length === 0) {

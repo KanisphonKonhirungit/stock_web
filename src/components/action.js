@@ -3,11 +3,6 @@ export const setProducts = (products) => ({
   payload: products,
 });
 
-// export const addProduct = (product) => ({
-//   type: "ADD_PRODUCT",
-//   payload: product,
-// });
-
 export const fetchProducts = () => async (dispatch) => {
   try {
     const response = await fetch("http://localhost:5031/api/products");
@@ -57,7 +52,7 @@ export const withdrawProduct = (productId, quantity) => async (dispatch) => {
   try {
     const response = await fetch(`http://localhost:5031/api/products/${productId}`);
     if (!response.ok) {
-      const errorMessage = await response.text(); // รับข้อความผิดพลาดจากเซิร์ฟเวอร์
+      const errorMessage = await response.text();
       alert(`Error fetching product: ${errorMessage}`);
       return;
     }

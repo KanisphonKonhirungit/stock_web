@@ -1,10 +1,9 @@
-// src/reducers/rootReducer.js
 
 import { combineReducers } from 'redux';
-import productReducer from './reducer.js'; // นำเข้าจากไฟล์ที่สร้างไว้
+import productReducer from './reducer.js';
 
 const rootReducer = combineReducers({
-  products: productReducer, // กำหนดให้ products ใช้ reducer นี้
+  products: productReducer,
 });
 
 export default rootReducer;

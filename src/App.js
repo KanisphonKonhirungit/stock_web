@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductList from "../src/components/ProductList";
 import AddProduct from "../src/components/AddProduct";
-import ProductLogPage from "../src/components/ProductLogPage"; // นำเข้า ProductLogPage
+import ProductLogPage from "../src/components/ProductLogPage";
 
 function App() {
   return (
